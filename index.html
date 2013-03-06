@@ -1,0 +1,173 @@
+<html>
+	<head>
+		<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+		<title>Stuart &amp; Marchele</title>
+		<link rel="stylesheet" href="basic.css" type="text/css" />
+		<link rel="stylesheet" href="galleriffic-2.css" type="text/css" />
+		<script type="text/javascript" src="jquery-1.3.2.js"></script>
+		<script type="text/javascript" src="jquery.galleriffic.js"></script>
+		<script type="text/javascript" src="jquery.opacityrollover.js"></script>
+		<!-- We only want the thunbnails to display when javascript is disabled -->
+		<script type="text/javascript">
+			document.write('<style>.noscript { display: none; }</style>');
+		</script>
+	</head>
+	<body>
+		<div id="page">
+			<div id="container">
+				<h2>
+					Stuart &amp; Marchele's Engagement
+					<div class="story-div">
+						The Story
+					</div>
+				</h2>
+
+				<!-- Start Advanced Gallery Html Containers -->
+				<div id="gallery-cont" style="display:block;">
+					<div id="gallery" class="content">
+						<div id="controls" class="controls"></div>
+						<div class="slideshow-container">
+							<div id="loading" class="loader"></div>
+							<div id="slideshow" class="slideshow"></div>
+						</div>
+						<div id="caption" class="caption-container"></div>
+					</div>
+					<div id="thumbs" class="navigation">
+						<ul class="thumbs noscript">
+							
+						</ul>
+					</div>
+					<div style="clear: both;"></div>
+				</div>
+				<div id="story" style="display:none;">
+					<img src="photo_strip.png" id="strip" />
+					<h2>The Story</h2>
+						<!--<h3>Dating</h3>
+							<p>Something here...</p>-->
+						<h3>Proposal (as told by Marchele)</h3>
+							<p>Friday morning was just another day! Stuart went to work and school and I did homework and went to work. It was kind of a long and stressful day at work for me because it was really busy and we were short on staff. Stuart also had a stressful day because he had a test in his class and was waiting to hear from the jeweler about the ring.</p>
+							<p>However, after work for both of us the day got a lot better. Stuart came to my apartment at about 6:50pm and had reservations made for us for dinner at Elements Restaurant for 7:30. We just sat and chatted for a while until it was time to go. Dinner was amazing, I had never been there, but it was delicious! I was just happy to be with Stuart and get my mind off of school, homework, and work and enjoy the night!</p>
+							<p>After dinner Stuart suggested getting a redbox and lime sherbet; both of our favorite flavor! So we did just that and got the movie Hotel Transylvania, which I had never seen. We then went to Stuart's apartment and he walked in in front of me, blocking my view. I walked in and saw a great big, home made photo booth that Stuart had built from a refrigerator box and packaging tape. I was very surprised and impressed with his skills! He said, "Well, let's take some pictures!"</p>
+							<p>So I went inside the photo booth and Stuart got the camera positioned. I was too short for the camera to see me though, so Stuart went and found some books for me to sit on. He then came in the booth with me and started the camera. The camera started taking a whole bunch of pictures as we made goofy faces and were just being our weird selves. When the camera stopped, he started it aagin and said, "Let's take some good ones now!" So we smiled and hugged and kissed for a few. He then turned to me and said, "Hey, I have a question for you!" I said, "Okay..." That is when he pulled out the ring and said, "Will you marry me!!" All I could do was smile at him and of course say yes!!! Then I gave him a great big hug and almost started to cry on his shoulder!</p>
+							<p>We came out of the photo booth and he gave me all the stuff from the jeweler: the jewelery cleaner, the ring box, warranty, coupons, etc. He then said, "There is one more part!" and he went and plugged his phone in to his speakers and turned on a playlist and danced with me for awhile. This was especially cute and sweet of him, because Stuart doesn't like to dance, but knows I love it! Apparently, he had made the playlist with two of my best friends, Tiffanie and Alecia, the night before and the songs were perfect!</p>
+							<p>At this point I asked Stuart if we could go and get my phone so that I could call my family, but instead we just texted Tiffanie and Alecia to bring it to me! They came over and I made some phone calls and then we all watched the movie together! After the movie Tiffanie and Alecia went home and Stuart and I ate some Sherbet and looked through our pictures!</p>
+							<p>The night couldn't have been any better! I love him so much and am super excited that we are engaged and will be getting married this summer for time and all eternity! I am so happy I get to spend forever and always with my best friend and the love of my life!! </p>
+				</div>
+			</div>
+		</div>
+		<div id="footer">Keyboard Keys:<br>
+			<table>
+				<tr>
+					<th>Action</th>
+					<th>Key</th>
+				</tr>
+				<tr>
+					<td>Next Picture</td>
+					<td>Right Arrow / Space</td>
+				</tr>
+				<tr>
+					<td>Previous Picture</td>
+					<td>Left Arrow</td>
+				</tr>
+				<tr>
+					<td>Next Page</td>
+					<td>Page Down</td>
+				</tr>
+				<tr>
+					<td>Previous Page</td>
+					<td>Page Up</td>
+				</tr>
+				<tr>
+					<td>Last Picture</td>
+					<td>End</td>
+				</tr>
+				<tr>
+					<td>First Picture</td>
+					<td>Home</td>
+				</tr>
+			</table>
+		</div>
+	</body>
+</html>
+
+<script type="text/javascript">
+	$.getJSON('dir.php',{}, function(data) {
+		$.each(data.payload,function(idx,val){
+			var li = $('<li><a class="thumb" name="" href="'+val.path+'" title=""><img src="'+val.thumb+'" alt="" /></a><div class="caption"></div></li>');
+			var ul = $('ul.thumbs.noscript');
+			ul.append(li);
+		});
+		$(document).ready(function($) {
+			// We only want these styles applied when javascript is enabled
+			$('div.navigation').css({'width' : '33%', 'float' : 'left'});
+			$('div.content').css('display', 'block');
+
+			// Initially set opacity on thumbs and add
+			// additional styling for hover effect on thumbs
+			var onMouseOutOpacity = 0.67;
+			$('#thumbs ul.thumbs li').opacityrollover({
+				mouseOutOpacity:   onMouseOutOpacity,
+				mouseOverOpacity:  1.0,
+				fadeSpeed:         'fast',
+				exemptionSelector: '.selected'
+			});
+			
+			// Initialize Advanced Galleriffic Gallery
+			var gallery = $('#thumbs').galleriffic({
+				delay:                     1050,
+				numThumbs:                 18,
+				preloadAhead:              250,
+				enableTopPager:            true,
+				enableBottomPager:         true,
+				maxPagesToShow:            7,
+				imageContainerSel:         '#slideshow',
+				controlsContainerSel:      '#controls',
+				captionContainerSel:       '#caption',
+				loadingContainerSel:       '#loading',
+				renderSSControls:          true,
+				renderNavControls:         true,
+				playLinkText:              'Play Slideshow',
+				pauseLinkText:             'Pause Slideshow',
+				prevLinkText:              '&lsaquo; Previous Photo',
+				nextLinkText:              'Next Photo &rsaquo;',
+				nextPageLinkText:          'Next &rsaquo;',
+				prevPageLinkText:          '&lsaquo; Prev',
+				enableHistory:             false,
+				autoStart:                 false,
+				syncTransitions:           true,
+				defaultTransitionDuration: 700,
+				onSlideChange:             function(prevIndex, nextIndex) {
+					// 'this' refers to the gallery, which is an extension of $('#thumbs')
+					this.find('ul.thumbs').children()
+						.eq(prevIndex).fadeTo('fast', onMouseOutOpacity).end()
+						.eq(nextIndex).fadeTo('fast', 1.0);
+				},
+				onPageTransitionOut:       function(callback) {
+					this.fadeTo('fast', 0.0, callback);
+				},
+				onPageTransitionIn:        function() {
+					this.fadeTo('fast', 1.0);
+				}
+			});
+			
+			$('div.story-div').click(function(){
+				var div = $('div.story-div'),
+					story = $('div#story'),
+					gallery = $('div#gallery-cont'),
+					footer = $('div#footer');
+					
+				if (story.css('display') == "none") {
+					gallery.hide();
+					footer.hide();
+					story.show(700);
+					div.html('Gallery');
+				} else {
+					story.hide();
+					gallery.show(700);
+					footer.show();
+					div.html('The Story');
+				}
+			});
+		});
+	});
+</script>
